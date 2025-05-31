@@ -5,7 +5,7 @@ This repository contains Python scripts for simulating and comparing PID (Propor
 This project is part of ME 548 Linear Multivariable Control at University of Washington.
 
 **For a detailed overview of the project, methodology, results, and analysis, please visit my main project website:**
-[[Link to Your Main Project Website]](https://reubenmathew7.github.io/PIDvsMPC/)
+[[PIDvsMPC]](https://reubenmathew7.github.io/PIDvsMPC/)
 
 ## Files in this Repository
 
