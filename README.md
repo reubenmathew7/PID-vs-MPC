@@ -30,5 +30,4 @@ The goal of this project is to:
 *   **Python:** **Python 3.10**. It is recommended to use a virtual environment.
 
 ### Python Packages:
-The necessary Python packages are listed in `requirements.txt`. You can install them using pip:
-```bash
+The necessary Python packages are listed in `requirements.txt`. You can install them using pip.
