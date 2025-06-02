@@ -139,22 +139,22 @@ def update_trajectory_plot(current_vehicle_loc_carla, current_ideal_loc_carla):
     if not PLOT_ENABLED or fig_trajectory is None: return
 
     # Draw lines using the globally populated lists
-    if actual_traj_line: # Check if the plot element exists
+    if actual_traj_line:
         actual_traj_line.set_data(actual_path_plot_x_traj, actual_path_plot_y_traj)
 
     # ideal_path_plot_x_traj and ideal_path_plot_y_traj are now fully populated
-    if ideal_traj_line: # Check if the plot element exists
+    if ideal_traj_line:
         ideal_traj_line.set_data(ideal_path_plot_x_traj, ideal_path_plot_y_traj)
 
     # Update current position markers using the passed arguments
     # Vehicle's current position marker
-    if current_pos_marker_actual_traj: # Check if the plot element exists
+    if current_pos_marker_actual_traj:
         veh_plot_x = current_vehicle_loc_carla.y
         veh_plot_y = current_vehicle_loc_carla.x
         current_pos_marker_actual_traj.set_data([veh_plot_x], [veh_plot_y])
 
     # Ideal waypoint marker
-    if current_pos_marker_ideal_traj: # Check if the plot element exists
+    if current_pos_marker_ideal_traj:
         if current_ideal_loc_carla:
             ideal_plot_x = current_ideal_loc_carla.y
             ideal_plot_y = current_ideal_loc_carla.x
@@ -479,10 +479,10 @@ try:
             throttle_cmd = 0.0
             brake_cmd = np.clip(optimal_accel_cmd / MIN_ACCEL, 0.0, 1.0) if MIN_ACCEL < 0 else 0.0
         
-        # Safety Brake Override (Applied BEFORE vehicle.apply_control)
+        # Safety Brake Override
         override_active_this_tick = False
         if (abs(cte_val_plot) > 2.0 or abs(math.degrees(heading_error_val_plot)) > 30) and current_speed_kmh_val > 70:
-            print_throttle_override = throttle_cmd # Store MPC throttle before overriding for comparison
+            print_throttle_override = throttle_cmd
             throttle_cmd = 0.0
             brake_cmd = 0.5
             override_active_this_tick = True
