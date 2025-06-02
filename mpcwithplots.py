@@ -464,8 +464,8 @@ try:
             ref_y_current = current_ideal_location_for_plot.y
             ref_yaw_current = ref_traj_np[0, 2] 
 
-            cte_val_plot = -(ref_x_current - current_carla_location.x) * math.sin(current_yaw_rad) + \
-                           (ref_y_current - current_carla_location.y) * math.cos(current_yaw_rad)
+            cte_val_plot = -(-(ref_x_current - current_carla_location.x) * math.sin(current_yaw_rad) + \
+                           (ref_y_current - current_carla_location.y) * math.cos(current_yaw_rad))
             heading_error_val_plot = normalize_angle(ref_yaw_current - current_yaw_rad)
 
         # Get MPC Commands
