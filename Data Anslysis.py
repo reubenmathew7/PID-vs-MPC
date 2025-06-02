@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.interpolate import interp1d
 
-# Path to your CSV files 
+# Path to CSV files 
 folder_path = r"C:/CARLA/CARLA_0.9.144"
 
 # Extract speeds automatically from filenames
@@ -16,7 +16,7 @@ mpc_files = sorted([f for f in all_files if f.startswith("mpc_data") and f.endsw
 def get_final_time(filepath):
     try:
         df = pd.read_csv(filepath)
-        return df.iloc[-1, 0]  # last row, first column (time)
+        return df.iloc[-1, 0]
     except:
         return None
 
@@ -53,7 +53,7 @@ mpc_sorted = sorted(zip(mpc_speeds, mpc_times))
 pid_speeds, pid_times = zip(*pid_sorted)
 mpc_speeds, mpc_times = zip(*mpc_sorted)
 
-# lotting
+# plotting
 plt.figure(figsize=(10, 6))
 plt.plot(pid_speeds, pid_times, marker='o', label='PID', linewidth=2)
 plt.plot(mpc_speeds, mpc_times, marker='s', label='MPC', linewidth=2)
@@ -85,7 +85,6 @@ def interpolate_cte(filepath, time_grid):
         df = pd.read_csv(filepath)
         time_vals = df["time"].values
         cte_vals = df["cte"].values
-        # Clip interpolation strictly to valid data range (no extrapolation)
         interp_fn = interp1d(time_vals, cte_vals, kind='linear', bounds_error=False, fill_value=np.nan)
         return interp_fn(time_grid)
     except:
@@ -259,7 +258,7 @@ for fname in pid_files:
             continue
 
         interp_fn = interp1d(time_vals, df["speed"].values, kind='linear', bounds_error=False, fill_value=np.nan)
-        speed_interp = interp_fn(time_grid)  # already in km/h
+        speed_interp = interp_fn(time_grid)
 
         pid_speed_all.append(speed_interp)
     except:
@@ -333,6 +332,6 @@ plt.title("Ideal Trajectory (Lane Center)")
 plt.xlabel("X Position [m]")
 plt.ylabel("Y Position [m]")
 plt.grid(True)
-plt.axis('equal')  # Keep aspect ratio so radius can be estimated visually
+plt.axis('equal')
 plt.tight_layout()
 plt.show()
